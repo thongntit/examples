@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+service Users {
+	rpc GetAllUser(GetAllUserReq) returns (GetAllUserResp){}
+	rpc GetUser(GetUserReq) returns (GetUserResp){}
+	rpc CreateUser(CreUserReq) returns (CreUserResp){}
+        rpc ValidateUser(ValidReq) returns (ValidRsp){}
+}
+
+message GetAllUserReq{}
+
+message GetAllUserResp{
+	repeated GetUserResp user = 1;
+}
+
+message GetUserReq {
+	int32 user_id = 1;
+}
+
+message GetUserResp {
+	int32 user_id = 1;
+	string user_name = 2;
+	string user_email = 3;
+}
+
+message CreUserReq {
+	string user_name = 1;
+	string user_email = 2;
+	string user_password = 3;
+}
+
+message CreUserResp {
+	int32 user_id = 1;
+}
+
+message ValidReq {
+        string user_email = 1;
+        string user_password = 2;
+}
+
+message ValidRsp {
+        bool status = 1;
+}
