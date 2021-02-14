@@ -6,3 +6,8 @@
   margin-left: auto;
   margin-right: auto;
 }
+.box2 {
+  width: 20rem;
+  height: 20rem;
+  background-image: linear-gradient(to right bottom, #00aefd , #ffa400 );
+}
