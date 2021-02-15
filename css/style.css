@@ -11,3 +11,14 @@
   height: 20rem;
   background-image: linear-gradient(to right bottom, #00aefd , #ffa400 );
 }
+.gradient__text {
+  font-weight: bold;
+  font-size: 3rem;
+  background-image: linear-gradient(to right bottom, #00aefd , #ffa400 ); 
+  display: inline-block;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
