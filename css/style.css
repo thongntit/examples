@@ -35,3 +35,30 @@
     color: blue;
   }
 }
+
+ul {
+  font-size: 4rem;
+  font-weight: 400;
+}
+
+li:first-child {
+  color: red;
+}
+li:last-child {
+  color: orange;
+}
+
+li:nth-child(2) {
+  color: purple;
+}
+
+li:nth-last-child(2) {
+  color: green;
+}
+
+li:not(:first-child) {
+  font-weight: 700;
+}
+li:nth-child(odd) {
+  margin-left: 1rem;
+}
