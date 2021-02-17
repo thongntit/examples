@@ -1,0 +1,23 @@
+.text {
+    margin-top: 50px;
+    position: relative;
+    text-align: center;
+}
+.text::after{
+    content: "";
+    width: 50%;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text__container {
+    padding: 10px;
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+}
