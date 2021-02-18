@@ -1,0 +1,16 @@
+.box {
+  width: 10rem;
+  height: 10rem;
+  background-color: red;
+  position: relative;
+  animation: move 2s forwards alternate infinite;
+}
+
+@keyframes move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(30rem);
+  }
+}
