@@ -48,22 +48,21 @@ body {
     }
   }
   &:hover {
-      .dropdown__list {
-          opacity: 1;
-          visibility: visible;
-      }
-      &::after {
-        visibility: visible;
-      }
+    .dropdown__list {
+      opacity: 1;
+      visibility: visible;
+    }
+    &::after {
+      visibility: visible;
+    }
   }
   &::after {
-      content: "";
-      position: absolute;
-      background-color: red;
-      top: 100%;
-      @include size(100%, 3rem);
-      background-color: transparent;
-      visibility: hidden;
+    content: "";
+    position: absolute;
+    top: 100%;
+    @include size(100%, 3rem);
+    background-color: transparent;
+    visibility: hidden;
   }
   &__list {
     border-radius: 4px;
@@ -76,14 +75,14 @@ body {
     opacity: 0;
     visibility: hidden;
     &::after {
-        content: "";
-        @include size(2rem);
-        position: absolute;
-        transform: rotate(45deg) translateY(-50%);
-        background-color: white;
-        top: 0;
-        right: 2rem;
-      }
+      content: "";
+      @include size(2rem);
+      position: absolute;
+      transform: rotate(45deg) translateY(-50%);
+      background-color: white;
+      top: 0;
+      right: 2rem;
+    }
     &::before {
       content: "";
       @include size(2rem);
