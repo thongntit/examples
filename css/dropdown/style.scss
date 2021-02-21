@@ -52,6 +52,9 @@ body {
           opacity: 1;
           visibility: visible;
       }
+      &::after {
+        visibility: visible;
+      }
   }
   &::after {
       content: "";
@@ -60,6 +63,7 @@ body {
       top: 100%;
       @include size(100%, 3rem);
       background-color: transparent;
+      visibility: hidden;
   }
   &__list {
     border-radius: 4px;
