@@ -1,0 +1,95 @@
+$primary-color: #42a7fe;
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+html {
+  font-size: 62.5%;
+}
+body {
+  background: #eee;
+}
+
+.dropdown {
+  width: 40rem;
+  margin: 2rem auto 0;
+  position: relative;
+  &__select {
+    padding: 2rem 2.5rem 2rem 4rem;
+    background-color: $primary-color;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  &__text {
+    margin-left: 3.5rem;
+  }
+  &__caret {
+    margin-left: auto;
+  }
+  &__item {
+    padding: 2rem 2.5rem 2rem 4rem;
+    display: flex;
+    align-items: center;
+    color: #b3bbce;
+    transition: color 0.2s linear;
+    border-left: 4px solid transparent;
+    background-color: white;
+    cursor: pointer;
+    &:not(:last-child) {
+      border-bottom: 1px solid #eee;
+    }
+    &:hover {
+      color: #74809d;
+      border-left: 4px solid $primary-color;
+    }
+  }
+  &:hover {
+      .dropdown__list {
+          opacity: 1;
+          visibility: visible;
+      }
+  }
+  &::after {
+      content: "";
+      position: absolute;
+      background-color: red;
+      top: 100%;
+      @include size(100%, 3rem);
+      background-color: transparent;
+  }
+  &__list {
+    border-radius: 4px;
+    box-shadow: 0 0 10px 0 rgba(black, 0.1);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    margin-top: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    &::after {
+        content: "";
+        @include size(2rem);
+        position: absolute;
+        transform: rotate(45deg) translateY(-50%);
+        background-color: white;
+        top: 0;
+        right: 2rem;
+      }
+    &::before {
+      content: "";
+      @include size(2rem);
+      position: absolute;
+      transform: rotate(45deg) translateY(-50%);
+      box-shadow: 0 0 10px 0 rgba(black, 0.1);
+      background-color: white;
+      top: 0;
+      right: 2rem;
+      z-index: -1;
+    }
+  }
+}
