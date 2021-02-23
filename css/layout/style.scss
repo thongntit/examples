@@ -1,0 +1,51 @@
+html {
+  font-size: 62.5%;
+}
+
+@mixin flexbox(
+  $align: flex-start,
+  $justify: flex-start,
+  $flex-direction: row,
+  $wrap: nowrap
+) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $flex-direction;
+  flex-wrap: nowrap;
+}
+
+.post {
+  &__list {
+    padding: 2rem;
+    @include flexbox(stretch);
+    margin-left: -2rem;
+  }
+
+  &__item {
+    margin-left: 2rem;
+    width: calc(33.33% - 2rem);
+  }
+
+  &__image {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+  }
+
+  &__content {
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid #eee;
+    line-height: 2;
+    height: calc(100% - 20rem);
+    @include flexbox(flex-start, space-between, column);
+  }
+
+  &__author {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem;
+    object-fit: cover;
+  }
+}
