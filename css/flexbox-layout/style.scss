@@ -1,0 +1,60 @@
+$primary-color: #FC556F;
+$secondary-color: #FD9C84;
+$gradient: linear-gradient(to right, $primary-color, $secondary-color);
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+@mixin flexbox(
+  $align: flex-start,
+  $justify: flex-start,
+  $flex-direction: row,
+  $wrap: nowrap
+) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $flex-direction;
+  flex-wrap: nowrap;
+}
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+  padding: 2rem;
+  background-color: #f3f3f3;
+}
+.post {
+  padding: 1rem;
+  border-radius: 2rem;
+  background-color: white;
+  position: relative;
+  @include flexbox(stretch);
+  // &__left;
+  &__right {
+    width: calc(50% - 1rem);
+  }
+  &__media {
+    height: 40rem;
+  }
+  &__image {
+    @include size(100%);
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+  &__category {
+    color: white;
+    font-size: 1.2rem;
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 2rem;
+    background-image: $gradient;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 2;
+  }
+}
