@@ -1,5 +1,5 @@
-$primary-color: #FC556F;
-$secondary-color: #FD9C84;
+$primary-color: #fc556f;
+$secondary-color: #fd9c84;
 $gradient: linear-gradient(to right, $primary-color, $secondary-color);
 
 @mixin size($width, $height: $width) {
@@ -28,17 +28,17 @@ body {
   background-color: #f3f3f3;
 }
 .post {
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 2rem;
   background-color: white;
-  position: relative;
   @include flexbox(stretch);
-  // &__left;
+
   &__right {
     width: calc(50% - 1rem);
   }
   &__media {
     height: 40rem;
+    position: relative;
   }
   &__image {
     @include size(100%);
@@ -56,5 +56,28 @@ body {
     top: 2rem;
     left: 2rem;
     z-index: 2;
+  }
+  &__icon {
+    @include size(5rem);
+    @include flexbox(center, center);
+    background-image: $gradient;
+    color: white;
+    border-radius: 5rem;
+    position: absolute;
+    bottom: 0;
+    right: 2rem;
+    z-index: 2;
+    transform: translateY(-50%);
+  }
+  &-author {
+    @include flexbox(center);
+    color: #333;
+    margin-top: 2rem;
+    &__avatar {
+      @include size(4rem);
+      object-fit: cover;
+      border-radius: 4rem;
+      margin-right: 1rem;
+    }
   }
 }
