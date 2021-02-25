@@ -18,6 +18,9 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
 }
+.post__left {
+  width: calc(50% - 1rem);
+}
 .post__right {
   width: calc(50% - 1rem);
 }
