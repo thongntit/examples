@@ -1,0 +1,33 @@
+.checkbox {
+  margin-top: 50px;
+  margin-left: 50px;
+}
+.checkbox__input {
+  display: none;
+}
+.checkbox__input:checked + .checkbox__label {
+  background-color: #7f6cfa;
+}
+.checkbox__input:checked + .checkbox__label .checkbox__spin {
+  transform: translateX(50px);
+  background-color: #ececec;
+}
+.checkbox__label {
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  background-color: #ececec;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.25s linear;
+}
+.checkbox__spin {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 5px;
+  transition: 0.25s linear;
+}
+
+/*# sourceMappingURL=style.css.map */

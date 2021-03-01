@@ -1,0 +1,33 @@
+@import "../mixins/main.scss";
+
+.checkbox {
+  margin-top: 50px;
+  margin-left: 50px;
+  &__input {
+    display: none;
+    &:checked + .checkbox__label {
+      .checkbox__spin {
+        transform: translateX(50px);
+        background-color: #ececec;
+      }
+      background-color: #7f6cfa;
+    }
+  }
+  &__label {
+    display: inline-block;
+    @include size(100px, 50px);
+    background-color: #ececec;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.25s linear
+  }
+  &__spin {
+    @include size(40px);
+    background-color: white;
+    border-radius: 50%;
+    margin: 5px;
+    transition: 0.25s linear
+
+  }
+
+}
