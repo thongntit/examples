@@ -1,0 +1,26 @@
+.file {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 1rem;
+  border: 1px solid #fc556f;
+  background-color: rgba(253, 156, 132, 0.5);
+  position: relative;
+}
+.file__input {
+  display: none;
+}
+.file__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,22 @@
+@import "../mixins/main.scss";
+
+.file {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 1rem;
+  border: 1px solid $primary-color;
+  background-color: rgba($secondary-color, $alpha: 0.5);
+  position: relative;
+  &__input {
+      display: none;
+  }
+  &__label {
+    @include flexbox(center, center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+}

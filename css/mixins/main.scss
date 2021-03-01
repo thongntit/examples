@@ -1,0 +1,20 @@
+$primary-color: #fc556f;
+$secondary-color: #fd9c84;
+$gradient: linear-gradient(to right, $primary-color, $secondary-color);
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+@mixin flexbox(
+  $align: flex-start,
+  $justify: flex-start,
+  $flex-direction: row,
+  $wrap: nowrap
+) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $flex-direction;
+  flex-wrap: nowrap;
+}
