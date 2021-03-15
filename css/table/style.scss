@@ -1,0 +1,74 @@
+@import "../mixins/main.scss";
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    font-weight: 600;
+    text-transform: uppercase;
+
+  }
+  td, th {
+    color: #8c94a7;
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 2rem;
+  }
+  thead tr {
+    border-bottom: 1px solid #ccc;
+  }
+  .desc {
+    white-space: nowrap;
+    max-width: 15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .status {
+    display: inline-block;
+    padding: 1rem 3rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 2rem;
+    &--active {
+      color: green;
+      background-color: rgba($color: green, $alpha: 0.2);
+    }
+  }
+  .action {
+    &-icon {
+      cursor: pointer;
+    }
+  }
+}
+
+.checkbox {
+  &__input {
+    display: none;
+    &:checked + .checkbox__label {
+      .checkbox__spin {
+        transform: translateX(50px);
+        background-color: #ececec;
+      }
+      background-color: #7f6cfa;
+    }
+  }
+  &__label {
+    display: inline-block;
+    @include size(100px, 50px);
+    background-color: #ececec;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.25s linear
+  }
+  &__spin {
+    @include size(40px);
+    background-color: white;
+    border-radius: 50%;
+    margin: 5px;
+    transition: 0.25s linear
+
+  }
+
+}

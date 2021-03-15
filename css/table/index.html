@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" />
+          </th>
+          <th>Tipo</th>
+          <th>Cordio</th>
+          <th>Description</th>
+          <th>Marca</th>
+          <th>Client</th>
+          <th>Active</th>
+          <th>Cardio</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>
+            <i class="fa fa-truck"></i>
+          </td>
+          <td>PR-005</td>
+          <td class="desc">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
+            ipsa esse necessitatibus dolor ab. Harum impedit aliquid eaque
+            aperiam qui reiciendis in, similique obcaecati dolores, minima, ut
+            tempore itaque. Iure.
+          </td>
+          <td>HP</td>
+          <td>
+            <div class="checkbox">
+              <input
+                type="checkbox"
+                id="checkbox__input"
+                class="checkbox__input"
+              />
+              <label for="checkbox__input" class="checkbox__label">
+                <div class="checkbox__spin"></div>
+              </label>
+            </div>
+          </td>
+          <td>
+            <div class="checkbox">
+              <input
+                type="checkbox"
+                id="checkbox_client"
+                class="checkbox__input"
+              />
+              <label for="checkbox_client" class="checkbox__label">
+                <div class="checkbox__spin"></div>
+              </label>
+            </div>
+          </td>
+          <td>
+            <span class="status status--active">Active</span>
+          </td>
+          <td>
+            <div class="action">
+              <i class="fa fa-edit action-icon"></i>
+              <i class="fa fa-circle action-icon"></i>
+              <i class="fa fa-trash action-icon"></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
