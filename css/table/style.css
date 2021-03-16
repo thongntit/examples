@@ -65,4 +65,14 @@ table .action-icon {
   transition: 0.25s linear;
 }
 
+@media screen and (max-width: 1279px) {
+  .table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .table::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

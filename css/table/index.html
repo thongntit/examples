@@ -18,74 +18,182 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <input type="checkbox" />
-          </th>
-          <th>Tipo</th>
-          <th>Cordio</th>
-          <th>Description</th>
-          <th>Marca</th>
-          <th>Client</th>
-          <th>Active</th>
-          <th>Cardio</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>
-            <i class="fa fa-truck"></i>
-          </td>
-          <td>PR-005</td>
-          <td class="desc">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
-            ipsa esse necessitatibus dolor ab. Harum impedit aliquid eaque
-            aperiam qui reiciendis in, similique obcaecati dolores, minima, ut
-            tempore itaque. Iure.
-          </td>
-          <td>HP</td>
-          <td>
-            <div class="checkbox">
-              <input
-                type="checkbox"
-                id="checkbox__input"
-                class="checkbox__input"
-              />
-              <label for="checkbox__input" class="checkbox__label">
-                <div class="checkbox__spin"></div>
-              </label>
-            </div>
-          </td>
-          <td>
-            <div class="checkbox">
-              <input
-                type="checkbox"
-                id="checkbox_client"
-                class="checkbox__input"
-              />
-              <label for="checkbox_client" class="checkbox__label">
-                <div class="checkbox__spin"></div>
-              </label>
-            </div>
-          </td>
-          <td>
-            <span class="status status--active">Active</span>
-          </td>
-          <td>
-            <div class="action">
-              <i class="fa fa-edit action-icon"></i>
-              <i class="fa fa-circle action-icon"></i>
-              <i class="fa fa-trash action-icon"></i>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <input type="checkbox" />
+            </th>
+            <th>Tipo</th>
+            <th>Cordio</th>
+            <th>Description</th>
+            <th>Marca</th>
+            <th>Client</th>
+            <th>Active</th>
+            <th>Cardio</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <i class="fa fa-truck"></i>
+            </td>
+            <td>PR-005</td>
+            <td rowspan="2" class="desc">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
+              ipsa esse necessitatibus dolor ab. Harum impedit aliquid eaque
+              aperiam qui reiciendis in, similique obcaecati dolores, minima, ut
+              tempore itaque. Iure.
+            </td>
+            <td>HP</td>
+            <td>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox__input"
+                  class="checkbox__input"
+                />
+                <label for="checkbox__input" class="checkbox__label">
+                  <div class="checkbox__spin"></div>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox_client"
+                  class="checkbox__input"
+                />
+                <label for="checkbox_client" class="checkbox__label">
+                  <div class="checkbox__spin"></div>
+                </label>
+              </div>
+            </td>
+            <td>
+              <span class="status status--active">Active</span>
+            </td>
+            <td>
+              <div class="action">
+                <i class="fa fa-edit action-icon"></i>
+                <i class="fa fa-circle action-icon"></i>
+                <i class="fa fa-trash action-icon"></i>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <i class="fa fa-truck"></i>
+            </td>
+            <td>PR-005</td>
+            <!-- <td class="desc">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
+                ipsa esse necessitatibus dolor ab. Harum impedit aliquid eaque
+                aperiam qui reiciendis in, similique obcaecati dolores, minima, ut
+                tempore itaque. Iure.
+              </td> -->
+            <td>HP</td>
+            <td>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox__input"
+                  class="checkbox__input"
+                />
+                <label for="checkbox__input" class="checkbox__label">
+                  <div class="checkbox__spin"></div>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox_client"
+                  class="checkbox__input"
+                />
+                <label for="checkbox_client" class="checkbox__label">
+                  <div class="checkbox__spin"></div>
+                </label>
+              </div>
+            </td>
+            <td>
+              <span class="status status--active">Active</span>
+            </td>
+            <td>
+              <div class="action">
+                <i class="fa fa-edit action-icon"></i>
+                <i class="fa fa-circle action-icon"></i>
+                <i class="fa fa-trash action-icon"></i>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <i class="fa fa-truck"></i>
+            </td>
+            <td>PR-005</td>
+            <td class="desc">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
+              ipsa esse necessitatibus dolor ab. Harum impedit aliquid eaque
+              aperiam qui reiciendis in, similique obcaecati dolores, minima, ut
+              tempore itaque. Iure.
+            </td>
+            <td>HP</td>
+            <td>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox__input"
+                  class="checkbox__input"
+                />
+                <label for="checkbox__input" class="checkbox__label">
+                  <div class="checkbox__spin"></div>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox_client"
+                  class="checkbox__input"
+                />
+                <label for="checkbox_client" class="checkbox__label">
+                  <div class="checkbox__spin"></div>
+                </label>
+              </div>
+            </td>
+            <td>
+              <span class="status status--active">Active</span>
+            </td>
+            <td>
+              <div class="action">
+                <i class="fa fa-edit action-icon"></i>
+                <i class="fa fa-circle action-icon"></i>
+                <i class="fa fa-trash action-icon"></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis alias
+      repudiandae sit iusto adipisci, eos reiciendis maxime quisquam dolores
+      velit voluptas illo odit cum error perferendis dignissimos expedita
+      similique ut.
+    </div>
   </body>
 </html>
