@@ -1,0 +1,64 @@
+@import "../mixins/main.scss";
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  @include flexbox(center, center);
+  height: 100vh;
+}
+.card {
+  position: relative;
+  width: 600px;
+  height: 350px;
+  margin: 20px;
+  @include flexbox(center);
+  background: linear-gradient(45deg, #1a2f3f, #7094ce);
+  &__char-img {
+    position: absolute;
+    bottom: 0;
+    height: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.5s;
+  }
+  &:hover .card__char-img {
+    left: 75%;
+    height: 450px;
+  }
+  &__content {
+    position: relative;
+    width: 40%;
+    left: 20%;
+    padding: 20px 20px 20px 40px;
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    h2 {
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 2.2em;
+      line-height: 1em;
+    }
+    p {
+      color: #fff;
+    }
+    a {
+      position: relative;
+      color: #111;
+      background-color: #fff;
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+  &:hover .card__content{
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+}
