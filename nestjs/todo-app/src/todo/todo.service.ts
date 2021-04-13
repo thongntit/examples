@@ -10,4 +10,7 @@ export class TodoService {
   findAll(): Todo[] {
     return this.todos;
   }
+  getTodoById(id: Todo['id']) {
+    return this.todos.find((todo) => todo.id === id);
+  }
 }
