@@ -1,0 +1,26 @@
+@import "../mixins/main.scss";
+
+.container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+.card {
+  @include size(200px, 50px);
+  background-color: #fafafa;
+  border-radius: 4px;
+  border-color: #eeeeee;
+  color: #333333;
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s all;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-4px);
+    box-shadow: 0 4px 17px #00000059;
+  }
+}
