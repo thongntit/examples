@@ -1,0 +1,40 @@
+@import "../mixins/main.scss";
+
+.radio {
+  margin: 5rem;
+  &__input {
+    display: none;
+    &:checked + .radio__label:before {
+      background-color: #fc556f;
+      box-shadow: 0 0 0 4px #fff, 0 0 0 6px #fc556f;
+    }
+    &:checked + .radio__label:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include size(8px, 4px);
+      transform: rotate(-45deg) translate(-70%);
+      border-left: 3px solid white;
+      border-bottom: 3px solid white;
+    }
+  }
+  &__label {
+    margin: 2rem;
+    position: relative;
+    padding-left: 1.5rem;
+    cursor: pointer;
+    &:before {
+      content: "";
+      @include size(20px);
+      border-radius: 3rem;
+      background-color: #eee;
+      box-shadow: 0 0 0 4px #eee, 0 0 0 6px #b7c1cb;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%);
+      transition: 0.25s ease;
+    }
+  }
+}
