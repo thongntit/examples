@@ -10,10 +10,10 @@ function App() {
 
   const [srcVideo, setsrcVideo] = useState();
   const [distVideo, setdistVideo] = useState("");
-  const [message, setMessage] = useState("Click Start to transcode");
+  const [message, setMessage] = useState("Loading ffmpeg-core.js");
   
   const doTranscode = async () => {
-
+    setMessage("Start insert a watermark");
     ffmpeg.FS('writeFile', 'watermark.webp', await fetchFile('/watermark.webp'));
     ffmpeg.FS('writeFile', 'source.mp4', await fetchFile(srcVideo));
     await ffmpeg.run("-i", "source.mp4","-i", "watermark.webp", "-filter_complex", "overlay=10:10", "dist.mp4");
@@ -27,9 +27,8 @@ function App() {
 
   useEffect(() => {
     const load = async () => {
-      setMessage("Loading ffmpeg-core.js");
       await ffmpeg.load();
-      setMessage("Start insert a watermark");
+      setMessage("Click Start to transcode");
     }
     load()
   }, [])
