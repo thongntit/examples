@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import "./App.css";
+
+const ffmpeg = createFFmpeg({
+  log: true,
+});
 
 function App() {
 
@@ -9,13 +13,7 @@ function App() {
   const [message, setMessage] = useState("Click Start to transcode");
   
   const doTranscode = async () => {
-    const ffmpeg = createFFmpeg({
-      log: true,
-    });
-    setMessage("Loading ffmpeg-core.js");
-    await ffmpeg.load();
 
-    setMessage("Start insert a watermark");
     ffmpeg.FS('writeFile', 'watermark.webp', await fetchFile('/watermark.webp'));
     ffmpeg.FS('writeFile', 'source.mp4', await fetchFile(srcVideo));
     await ffmpeg.run("-i", "source.mp4","-i", "watermark.webp", "-filter_complex", "overlay=10:10", "dist.mp4");
@@ -26,6 +24,15 @@ function App() {
       URL.createObjectURL(new Blob([data.buffer], { type: "video/mp4" }))
     );
   };
+
+  useEffect(() => {
+    const load = async () => {
+      setMessage("Loading ffmpeg-core.js");
+      await ffmpeg.load();
+      setMessage("Start insert a watermark");
+    }
+    load()
+  }, [])
 
   return (
     <div className="App">
