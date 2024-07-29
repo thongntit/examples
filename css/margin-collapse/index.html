@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Margin Collapse</h1>
+        <a href="https://www.joshwcomeau.com/css/rules-of-margin-collapse/">The Rules of Margin Collapse</a>
+        <a
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing#empty_blocks">Mastering
+            Margin Collapse</a>
+        <div class="example1">
+            <h4>Example 1 - Adjacent siblings</h4>
+            <p>Box 1</p>
+            <p>Box 2</p>
+        </div>
+
+        <div class="example2">
+            <h4>Example 2 - No content separating parent and descendants</h4>
+            <div class="ex2Container">
+                <div class="parent">
+                    <p class="child">Box 1</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example3">
+            <h4>Example 3 - Empty blocks</h4>
+            <p style="margin-top: 50px; margin-bottom: 100px;"></p>
+        </div>
+
+        <div class="example4">
+            <h4>Example 4 - Horizon siblings</h4>
+            <p>Box 1</p>
+            <p>Box 2</p>
+            <h4> => Only vertical margins collapse</h4>
+        </div>
+
+
+
+        <div class="example1">
+            <h4>Example 5 - Ex1 Answer</h4>
+            <p>Box 1</p>
+            <br />
+            <p>Box 2</p>
+            <h4>=> add separator between Box 1 and Box 2</h4>
+        </div>
+
+        <div class="example1">
+            <h4>Example 6 - Ex1 Answer</h4>
+            <div class="box-1-parent">
+                <p>Box 1</p>
+            </div>
+            <p>Box 2</p>
+            <h4> => Box 1 is in new formatting context</h4>
+        </div>
+
+        <div class="example2">
+            <h4>Example 7 - Ex2 Answer</h4>
+            <div class="ex2Container">
+                <div class="parent" style="padding-top: 1px">
+                    <p class="child">Box 1</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example3">
+            <h4>Example 8 - Ex3 Answer</h4>
+            <p style="margin-top: 50px; margin-bottom: 100px; padding-top: 1px"></p>
+        </div>
+    </div>
+
+</body>
+
+</html>

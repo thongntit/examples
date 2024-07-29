@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container>div {
+    width: 768px;
+    border: 1px solid rgb(37, 211, 173);
+    margin-bottom: 10px;
+    padding: 2rem;
+}
+
+.example1 {
+    p {
+        border: 1px solid black;
+    }
+}
+
+.example2>.ex2Container {
+    border: 1px solid black;
+}
+
+.ex2Container .parent {
+    margin-top: 20px;
+}
+
+.ex2Container .child {
+    margin-top: 50px;
+    border-top: 1px;
+}
+
+
+.example4 {
+    p {
+        display: inline-block;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 1px solid black;
+    }
+}
+
+/* solution example 4 */
+.example1 .box-1-parent {
+    display: flow-root;
+}
+
+/* solution example 4 - 2 */
+/* .example1 .box-1-parent {
+    overflow: auto;
+} */
