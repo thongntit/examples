@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heavy Function Impact: setTimeout vs requestAnimationFrame</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 800px;
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: relative;
+        }
+        #rafBox {
+            background-color: green;
+        }
+        .timeline {
+            width: 300px;
+            height: 20px;
+            background-color: #ddd;
+            margin-top: 10px;
+            position: relative;
+        }
+        .marker {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Heavy Function Impact</h1>
+    <div class="container">
+        <div>
+            <h2>setTimeout</h2>
+            <div id="setTimeoutBox" class="box"></div>
+            <div id="setTimeoutTimeline" class="timeline"></div>
+        </div>
+        <div>
+            <h2>requestAnimationFrame</h2>
+            <div id="rafBox" class="box"></div>
+            <div id="rafTimeline" class="timeline"></div>
+        </div>
+    </div>
+    <button onclick="startAnimation()">Start Animation</button>
+    <button onclick="runHeavyFunction()">Run Heavy Function</button>
+
+    <script>
+        const setTimeoutBox = document.getElementById('setTimeoutBox');
+        const rafBox = document.getElementById('rafBox');
+        const setTimeoutTimeline = document.getElementById('setTimeoutTimeline');
+        const rafTimeline = document.getElementById('rafTimeline');
+
+        let setTimeoutPosition = 0;
+        let rafPosition = 0;
+        let isAnimating = false;
+
+        function heavyFunction() {
+            console.log('Heavy function started');
+            const start = performance.now();
+            while (performance.now() - start < 2000) {
+                // Simulate heavy computation for 2 seconds
+            }
+            console.log('Heavy function ended');
+        }
+
+        function moveBoxSetTimeout() {
+            if (!isAnimating) return;
+
+            setTimeoutPosition += 2;
+            setTimeoutBox.style.transform = `translateX(${setTimeoutPosition}px)`;
+
+            const marker = document.createElement('div');
+            marker.className = 'marker';
+            marker.style.left = `${setTimeoutPosition}px`;
+            setTimeoutTimeline.appendChild(marker);
+
+            if (setTimeoutPosition < 300) {
+                setTimeout(moveBoxSetTimeout, 16); // Approx. 60 FPS
+            }
+        }
+
+        function moveBoxRAF(timestamp) {
+            if (!isAnimating) return;
+
+            rafPosition += 2;
+            rafBox.style.transform = `translateX(${rafPosition}px)`;
+
+            const marker = document.createElement('div');
+            marker.className = 'marker';
+            marker.style.left = `${rafPosition}px`;
+            rafTimeline.appendChild(marker);
+
+            if (rafPosition < 300) {
+                requestAnimationFrame(moveBoxRAF);
+            }
+        }
+
+        function startAnimation() {
+            isAnimating = true;
+            setTimeoutPosition = 0;
+            rafPosition = 0;
+            setTimeoutTimeline.innerHTML = '';
+            rafTimeline.innerHTML = '';
+            setTimeoutBox.style.transform = 'translateX(0)';
+            rafBox.style.transform = 'translateX(0)';
+
+            moveBoxSetTimeout();
+            requestAnimationFrame(moveBoxRAF);
+        }
+
+        function runHeavyFunction() {
+            heavyFunction();
+        }
+    </script>
+</body>
+</html>
