@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame Skip Comparison: setTimeout vs requestAnimationFrame</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+        .animation-container {
+            margin-bottom: 20px;
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            margin: 20px auto;
+            margin-left: 0;
+        }
+        #setTimeoutBox {
+            background-color: blue;
+        }
+        #rafBox {
+            background-color: green;
+        }
+        .timeline {
+            width: 100%;
+            height: 50px;
+            background-color: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+        .marker {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+        }
+        .setTimeout-marker {
+            background-color: red;
+        }
+        .raf-marker {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frame Skip Comparison</h1>
+        <div class="animation-container">
+            <h2>setTimeout</h2>
+            <div id="setTimeoutBox" class="box"></div>
+            <div id="setTimeoutTimeline" class="timeline"></div>
+        </div>
+        <div class="animation-container">
+            <h2>requestAnimationFrame</h2>
+            <div id="rafBox" class="box"></div>
+            <div id="rafTimeline" class="timeline"></div>
+        </div>
+        <button onclick="startAnimations()">Start Animations</button>
+    </div>
+
+    <script>
+        const setTimeoutBox = document.getElementById('setTimeoutBox');
+        const rafBox = document.getElementById('rafBox');
+        const setTimeoutTimeline = document.getElementById('setTimeoutTimeline');
+        const rafTimeline = document.getElementById('rafTimeline');
+
+        let setTimeoutPosition = 0;
+        let rafPosition = 0;
+        let lastSetTimeoutTimestamp = 0;
+        let lastRafTimestamp = 0;
+
+        function moveBoxSetTimeout() {
+            const now = performance.now();
+            const elapsed = now - lastSetTimeoutTimestamp;
+
+            setTimeoutPosition += 100 * (elapsed / 1000); // Move 100 pixels per second
+
+            const marker = document.createElement('div');
+            marker.className = 'marker setTimeout-marker';
+            marker.style.left = `${setTimeoutPosition}px`;
+            setTimeoutTimeline.appendChild(marker);
+
+            setTimeoutBox.style.left = `${setTimeoutPosition}px`;
+
+            lastSetTimeoutTimestamp = now;
+
+            if (setTimeoutPosition < 300) {
+                const delay = Math.random() * 50 + 10; // Random delay between 10ms and 60ms
+                setTimeout(moveBoxSetTimeout, delay);
+            }
+        }
+
+        function moveBoxRAF(timestamp) {
+            if (!lastRafTimestamp) lastRafTimestamp = timestamp;
+            const elapsed = timestamp - lastRafTimestamp;
+
+            rafPosition += 100 * (elapsed / 1000); // Move 100 pixels per second
+
+            const marker = document.createElement('div');
+            marker.className = 'marker raf-marker';
+            marker.style.left = `${rafPosition}px`;
+            rafTimeline.appendChild(marker);
+
+            rafBox.style.left = `${rafPosition}px`;
+
+            lastRafTimestamp = timestamp;
+
+            if (rafPosition < 300) {
+                requestAnimationFrame(moveBoxRAF);
+            }
+        }
+
+        function startAnimations() {
+            // Reset positions and timelines
+            setTimeoutPosition = 0;
+            rafPosition = 0;
+            setTimeoutBox.style.left = '0px';
+            rafBox.style.left = '0px';
+            setTimeoutTimeline.innerHTML = '';
+            rafTimeline.innerHTML = '';
+            lastSetTimeoutTimestamp = performance.now();
+            lastRafTimestamp = 0;
+
+            // Start animations
+            moveBoxSetTimeout();
+            requestAnimationFrame(moveBoxRAF);
+        }
+    </script>
+</body>
+</html>

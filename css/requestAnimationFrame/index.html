@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>requestAnimationFrame vs setInterval Example</title>
+    <style>
+        body {
+            overflow: hidden;            
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+        }
+        #boxWithoutRAF {
+            top: 50px;
+            background-color: red;
+        }
+        #boxWithRAF {
+            top: 150px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="boxWithoutRAF" class="box"></div>
+    <div id="boxWithRAF" class="box"></div>
+
+    <script>
+        // Without requestAnimationFrame (using setInterval)
+        let position = 0;
+        const boxWithoutRAF = document.getElementById('boxWithoutRAF');
+
+        function moveBoxWithoutRAF() {
+            position += 5;
+            boxWithoutRAF.style.left = position + 'px';
+            if (position >= window.innerWidth) {
+                position = 0;
+            }
+        }
+
+        setInterval(moveBoxWithoutRAF, 16); // Roughly 60 FPS
+
+        // With requestAnimationFrame
+        let rafPosition = 0;
+        const boxWithRAF = document.getElementById('boxWithRAF');
+
+        function moveBoxWithRAF() {
+            rafPosition += 5;
+            boxWithRAF.style.left = rafPosition + 'px';
+            if (rafPosition >= window.innerWidth) {
+                rafPosition = 0;
+            }
+            requestAnimationFrame(moveBoxWithRAF);
+        }
+
+        requestAnimationFrame(moveBoxWithRAF);
+    </script>
+</body>
+</html>
