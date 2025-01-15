@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+.item {
+  flex-shrink: 0;
+}
+
+.item-grow {
+  flex-grow: 1;
+  min-width: 0; /* Required for text truncation */
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
