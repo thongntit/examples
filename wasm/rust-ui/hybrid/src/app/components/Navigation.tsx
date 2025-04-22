@@ -7,29 +7,29 @@ export function Navigation() {
   const pathname = usePathname();
   
   return (
-    <nav className="bg-gray-100 p-4 mb-6">
+    <nav className="bg-gray-900 border-b border-gray-700 shadow-md p-4 mb-6">
       <div className="container mx-auto">
         <ul className="flex space-x-6">
           <li>
-            <Link 
-              href="/" 
-              className={`font-medium ${pathname === '/' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+            <Link
+              href="/"
+              className={`font-medium ${pathname === '/' ? 'text-blue-400 underline' : 'text-gray-300 hover:text-blue-300'}`}
             >
               Home
             </Link>
           </li>
           <li>
-            <Link 
-              href="/wasm" 
-              className={`font-medium ${pathname === '/wasm' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+            <Link
+              href="/wasm"
+              className={`font-medium ${pathname === '/wasm' ? 'text-blue-400 underline' : 'text-gray-300 hover:text-blue-300'}`}
             >
               WASM Implementation
             </Link>
           </li>
           <li>
-            <Link 
-              href="/react" 
-              className={`font-medium ${pathname === '/react' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+            <Link
+              href="/react"
+              className={`font-medium ${pathname === '/react' ? 'text-blue-400 underline' : 'text-gray-300 hover:text-blue-300'}`}
             >
               React Implementation
             </Link>

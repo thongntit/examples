@@ -68,19 +68,19 @@ export default function ReactPage() {
     <div className="container mx-auto px-4 py-8">
       <Navigation />
       
-      <h1 className="text-3xl font-bold mb-6 text-center">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-100">
         React Implementation
       </h1>
       
       {/* Performance Dashboard */}
-      <PerformanceDashboard 
+      <PerformanceDashboard
         metrics={metrics}
         events={events}
         implementationType="react"
       />
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">
+        <h2 className="text-xl font-semibold mb-4 text-gray-200">
           Products (React Component)
         </h2>
         <div className="react-product-grid">
@@ -95,16 +95,16 @@ export default function ReactPage() {
       </div>
 
       {/* Cart Information (React Component) */}
-      <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-        <h2 className="text-xl font-semibold mb-2">
+      <div className="bg-gray-800 border border-gray-700 p-4 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-2 text-gray-200">
           Cart ({cart.reduce((sum, item) => sum + (item.quantity || 0), 0)}{" "}
           items)
         </h2>
         {cart.length === 0 ? (
-          <p className="text-gray-500 py-4 text-center">Your cart is empty</p>
+          <p className="text-gray-400 py-4 text-center">Your cart is empty</p>
         ) : (
           <>
-            <ul className="divide-y">
+            <ul className="divide-y divide-gray-700">
               {cart.map((item) => (
                 <li
                   key={item.id}
@@ -118,20 +118,20 @@ export default function ReactPage() {
                         className="object-cover w-full h-full rounded"
                       />
                     </div>
-                    <span className="font-medium">{item.name}</span>
+                    <span className="font-medium text-gray-200">{item.name}</span>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-400">
                       ${item.price.toFixed(2)} × {item.quantity}
                     </div>
-                    <div className="font-bold">
+                    <div className="font-bold text-gray-100">
                       ${(item.price * item.quantity).toFixed(2)}
                     </div>
                   </div>
                 </li>
               ))}
             </ul>
-            <div className="mt-4 text-right font-bold text-lg border-t pt-4">
+            <div className="mt-4 text-right font-bold text-lg border-t border-gray-700 pt-4 text-gray-100">
               Total: $
               {cart
                 .reduce(

@@ -59,17 +59,17 @@ pub fn render_product_grid(
     // Render each product
     for product in page_products {
         html.push_str(&format!(r#"
-            <div class="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="border border-gray-600 bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                 <div class="relative w-full h-48">
                     <img src="{}" alt="{}" class="object-cover w-full h-full"/>
                 </div>
                 <div class="p-4">
-                    <h3 class="text-lg font-semibold mb-1">{}</h3>
-                    <p class="text-gray-600 text-sm mb-2 line-clamp-2">{}</p>
+                    <h3 class="text-lg font-semibold mb-1 text-gray-200">{}</h3>
+                    <p class="text-gray-400 text-sm mb-2 line-clamp-2">{}</p>
                     <div class="flex items-center justify-between mt-4">
-                        <span class="text-lg font-bold">${:.2}</span>
-                        <button 
-                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                        <span class="text-lg font-bold text-gray-200">${:.2}</span>
+                        <button
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
                             data-product-id="{}"
                             onclick="window.rustAddToCart('{}')"
                         >
@@ -94,28 +94,28 @@ pub fn render_product_grid(
     if total_pages > 1 {
         html.push_str(&format!(r#"
             <div class="flex justify-center gap-2 mt-6">
-                <button 
-                    class="px-4 py-2 border rounded-lg {}" 
+                <button
+                    class="px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-200 {}"
                     onclick="window.rustPageChange({})"
                 >
                     Previous
                 </button>
-                <span class="px-4 py-2">
+                <span class="px-4 py-2 text-gray-300">
                     Page {} of {}
                 </span>
-                <button 
-                    class="px-4 py-2 border rounded-lg {}" 
+                <button
+                    class="px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-200 {}"
                     onclick="window.rustPageChange({})"
                 >
                     Next
                 </button>
             </div>
         "#,
-        if current_page == 1 { "disabled opacity-50 cursor-not-allowed" } else { "hover:bg-gray-100" },
+        if current_page == 1 { "disabled opacity-50 cursor-not-allowed" } else { "hover:bg-gray-700" },
         current_page - 1,
         current_page,
         total_pages,
-        if current_page == total_pages { "disabled opacity-50 cursor-not-allowed" } else { "hover:bg-gray-100" },
+        if current_page == total_pages { "disabled opacity-50 cursor-not-allowed" } else { "hover:bg-gray-700" },
         current_page + 1
         ));
     }

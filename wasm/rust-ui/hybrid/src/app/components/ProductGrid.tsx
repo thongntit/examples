@@ -35,17 +35,17 @@ export function ProductGrid({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 border rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
+          className="px-4 py-2 border border-gray-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gray-800 hover:bg-gray-700 text-gray-200"
         >
           Previous
         </button>
-        <span className="px-4 py-2">
+        <span className="px-4 py-2 text-gray-300">
           Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 border rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
+          className="px-4 py-2 border border-gray-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gray-800 hover:bg-gray-700 text-gray-200"
         >
           Next
         </button>
@@ -57,7 +57,7 @@ export function ProductGrid({
   if (products.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-500">No products found</p>
+        <p className="text-gray-400">No products found</p>
       </div>
     );
   }
