@@ -1,51 +1,47 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { mockProducts } from '../data/mockProducts';
-import { Navigation } from '../components/Navigation';
-import { ProductGrid } from '../components/ProductGrid';
-import { PerformanceDashboard } from '../components/PerformanceDashboard';
-import { usePerformanceMetrics } from '../utils/usePerformanceMetrics';
-import type { Product } from '../types/product';
+import { useState } from "react";
+import { mockProducts } from "../data/mockProducts";
+import { Navigation } from "../components/Navigation";
+import { ProductGrid } from "../components/ProductGrid";
+import { PerformanceDashboard } from "../components/PerformanceDashboard";
+import { usePerformanceMetrics } from "../utils/usePerformanceMetrics";
+import type { Product } from "../types/product";
 
 export default function ReactPage() {
   // Performance metrics
-  const { 
-    metrics, 
-    events, 
-    startInteractionTimer, 
-    endInteractionTimer 
-  } = usePerformanceMetrics({ implementationType: 'react' });
-  
+  const { metrics, events, startInteractionTimer, endInteractionTimer } =
+    usePerformanceMetrics({ implementationType: "react" });
+
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
-  
+
   // Cart state
   const [cart, setCart] = useState<any[]>([]);
-  
+
   // Handle page change with performance measurement
   const handlePageChange = (page: number) => {
-    startInteractionTimer('pagination');
+    startInteractionTimer("pagination");
     setCurrentPage(page);
     // We need a small delay to properly measure the time after the state update and re-render
     setTimeout(() => {
-      endInteractionTimer('pagination');
+      endInteractionTimer("pagination");
     }, 50);
   };
-  
+
   // Handle adding product to cart with performance measurement
   const handleAddToCart = (product: Product) => {
-    startInteractionTimer('addToCart');
-    
+    startInteractionTimer("addToCart");
+
     setCart((prevCart) => {
       // Check if product is already in cart
-      const existingItem = prevCart.find(item => item.id === product.id);
-      
+      const existingItem = prevCart.find((item) => item.id === product.id);
+
       if (existingItem) {
         // Increase quantity if product already exists
-        return prevCart.map(item => 
-          item.id === product.id 
+        return prevCart.map((item) =>
+          item.id === product.id
             ? { ...item, quantity: (item.quantity || 1) + 1 }
             : item
         );
@@ -54,30 +50,20 @@ export default function ReactPage() {
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
-    
+
     // End timing after state update
     setTimeout(() => {
-      endInteractionTimer('addToCart');
+      endInteractionTimer("addToCart");
     }, 50);
-    
-    // Show feedback
-    alert(`Added ${product.name} to cart!`);
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <Navigation />
-      
+
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-100">
         React Implementation
       </h1>
-      
-      {/* Performance Dashboard */}
-      <PerformanceDashboard
-        metrics={metrics}
-        events={events}
-        implementationType="react"
-      />
 
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4 text-gray-200">
@@ -95,7 +81,7 @@ export default function ReactPage() {
       </div>
 
       {/* Cart Information (React Component) */}
-      <div className="bg-gray-800 border border-gray-700 p-4 rounded-lg shadow-md">
+      <div className="bg-gray-800 mb-8 border border-gray-700 p-4 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-2 text-gray-200">
           Cart ({cart.reduce((sum, item) => sum + (item.quantity || 0), 0)}{" "}
           items)
@@ -118,7 +104,9 @@ export default function ReactPage() {
                         className="object-cover w-full h-full rounded"
                       />
                     </div>
-                    <span className="font-medium text-gray-200">{item.name}</span>
+                    <span className="font-medium text-gray-200">
+                      {item.name}
+                    </span>
                   </div>
                   <div className="text-right">
                     <div className="text-sm text-gray-400">
@@ -143,6 +131,13 @@ export default function ReactPage() {
           </>
         )}
       </div>
+
+      {/* Performance Dashboard */}
+      <PerformanceDashboard
+        metrics={metrics}
+        events={events}
+        implementationType="react"
+      />
     </div>
   );
 }

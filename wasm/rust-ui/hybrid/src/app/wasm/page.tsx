@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
-import { mockProducts } from '../data/mockProducts';
-import { Navigation } from '../components/Navigation';
-import { PerformanceDashboard } from '../components/PerformanceDashboard';
-import { usePerformanceMetrics } from '../utils/usePerformanceMetrics';
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import { mockProducts } from "../data/mockProducts";
+import { Navigation } from "../components/Navigation";
+import { PerformanceDashboard } from "../components/PerformanceDashboard";
+import { usePerformanceMetrics } from "../utils/usePerformanceMetrics";
 
 // We need to use dynamic import with SSR disabled for the WebAssembly component
 // as WebAssembly loading requires client-side capabilities
-const RustProductGrid = dynamic(
-  () => import('../components/RustProductGrid'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="text-center py-12 border rounded-lg">
-        <div className="animate-pulse flex flex-col items-center">
-          <div className="h-8 w-3/4 mb-6 rounded"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full px-6">
-            {Array(8).fill(0).map((_, i) => (
+const RustProductGrid = dynamic(() => import("../components/RustProductGrid"), {
+  ssr: false,
+  loading: () => (
+    <div className="text-center py-12 border rounded-lg">
+      <div className="animate-pulse flex flex-col items-center">
+        <div className="h-8 w-3/4 mb-6 rounded"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full px-6">
+          {Array(8)
+            .fill(0)
+            .map((_, i) => (
               <div key={i} className="border rounded-lg p-4">
                 <div className="h-40 rounded-md mb-4"></div>
                 <div className="h-6rounded mb-2 w-3/4"></div>
@@ -29,51 +29,46 @@ const RustProductGrid = dynamic(
                 </div>
               </div>
             ))}
-          </div>
         </div>
       </div>
-    )
-  }
-);
+    </div>
+  ),
+});
 
 export default function WasmPage() {
   // Performance metrics
-  const { 
-    metrics, 
-    events, 
-    startInteractionTimer, 
-    endInteractionTimer 
-  } = usePerformanceMetrics({ implementationType: 'wasm' });
-  
+  const { metrics, events, startInteractionTimer, endInteractionTimer } =
+    usePerformanceMetrics({ implementationType: "wasm" });
+
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
-  
+
   // Cart state
   const [cart, setCart] = useState<any[]>([]);
-  
+
   // Handle page change with performance measurement
   const handlePageChange = (page: number) => {
-    startInteractionTimer('pagination');
+    startInteractionTimer("pagination");
     setCurrentPage(page);
     // We need a small delay to properly measure the time after the state update and re-render
     setTimeout(() => {
-      endInteractionTimer('pagination');
+      endInteractionTimer("pagination");
     }, 50);
   };
-  
+
   // Handle adding product to cart with performance measurement
   const handleAddToCart = (product: any) => {
-    startInteractionTimer('addToCart');
-    
+    startInteractionTimer("addToCart");
+
     setCart((prevCart) => {
       // Check if product is already in cart
-      const existingItem = prevCart.find(item => item.id === product.id);
-      
+      const existingItem = prevCart.find((item) => item.id === product.id);
+
       if (existingItem) {
         // Increase quantity if product already exists
-        return prevCart.map(item => 
-          item.id === product.id 
+        return prevCart.map((item) =>
+          item.id === product.id
             ? { ...item, quantity: (item.quantity || 1) + 1 }
             : item
         );
@@ -82,30 +77,20 @@ export default function WasmPage() {
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
-    
+
     // End timing after state update
     setTimeout(() => {
-      endInteractionTimer('addToCart');
+      endInteractionTimer("addToCart");
     }, 50);
-    
-    // Show feedback
-    alert(`Added ${product.name} to cart!`);
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <Navigation />
-      
+
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-100">
         WebAssembly Implementation
       </h1>
-      
-      {/* Performance Dashboard */}
-      <PerformanceDashboard
-        metrics={metrics}
-        events={events}
-        implementationType="wasm"
-      />
 
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4 text-gray-200">
@@ -124,7 +109,7 @@ export default function WasmPage() {
       </div>
 
       {/* Cart Information (React Component) */}
-      <div className="bg-gray-800 border border-gray-700 p-4 rounded-lg shadow-md">
+      <div className="bg-gray-800 mb-8 border border-gray-700 p-4 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-2 text-gray-200">
           Cart ({cart.reduce((sum, item) => sum + (item.quantity || 0), 0)}{" "}
           items)
@@ -147,7 +132,9 @@ export default function WasmPage() {
                         className="object-cover w-full h-full rounded"
                       />
                     </div>
-                    <span className="font-medium text-gray-200">{item.name}</span>
+                    <span className="font-medium text-gray-200">
+                      {item.name}
+                    </span>
                   </div>
                   <div className="text-right">
                     <div className="text-sm text-gray-400">
@@ -172,6 +159,13 @@ export default function WasmPage() {
           </>
         )}
       </div>
+
+      {/* Performance Dashboard */}
+      <PerformanceDashboard
+        metrics={metrics}
+        events={events}
+        implementationType="wasm"
+      />
     </div>
   );
 }
