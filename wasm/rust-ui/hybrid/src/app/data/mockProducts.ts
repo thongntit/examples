@@ -1,3 +1,5 @@
+'use client';
+
 import { Product } from '../types/product';
 
 const categories = ['Electronics', 'Clothing', 'Books', 'Home & Garden', 'Sports', 'Toys'];
@@ -12,15 +14,21 @@ const productTypes = [
 ];
 
 function generateMockProduct(id: number): Product {
+  // Use deterministic values based on the id instead of Math.random()
+  // This prevents hydration errors between server and client rendering
   const category = categories[Math.floor(id / 200) % categories.length];
-  const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const adjectiveIndex = (id % adjectives.length);
+  const adjective = adjectives[adjectiveIndex];
   const productType = productTypes[Math.floor(id / 60) % productTypes.length];
   const name = `${adjective} ${productType}`;
+  
+  // Generate a deterministic price based on id
+  const price = 100 + ((id * 17) % 900);
   
   return {
     id: id.toString(),
     name,
-    price: Math.floor(Math.random() * 900) + 100, // Price between 100 and 999
+    price,
     imageUrl: `https://picsum.photos/seed/${id}/400/400`, // Random image for each product
     description: `High-quality ${name.toLowerCase()} perfect for everyday use. Features premium materials and exceptional craftsmanship.`,
     category,
