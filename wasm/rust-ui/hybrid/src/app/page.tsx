@@ -1,151 +1,72 @@
 'use client';
 
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
-import { mockProducts } from './data/mockProducts';
-
-// We need to use dynamic import with SSR disabled for the WebAssembly component
-// as WebAssembly loading requires client-side capabilities
-const RustProductGrid = dynamic(
-  () => import('./components/RustProductGrid'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="text-center py-12 border rounded-lg">
-        <div className="animate-pulse flex flex-col items-center">
-          <div className="h-8 w-3/4 bg-gray-200 mb-6 rounded"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full px-6">
-            {Array(8).fill(0).map((_, i) => (
-              <div key={i} className="border rounded-lg p-4">
-                <div className="h-40 bg-gray-200 rounded-md mb-4"></div>
-                <div className="h-6 bg-gray-200 rounded mb-2 w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded mb-4 w-full"></div>
-                <div className="flex justify-between items-center">
-                  <div className="h-6 bg-gray-200 rounded w-1/4"></div>
-                  <div className="h-8 bg-gray-200 rounded w-1/3"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
-);
+import { Navigation } from './components/Navigation';
 
 export default function Home() {
-  // State for pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(12);
-  
-  // Cart state
-  const [cart, setCart] = useState<any[]>([]);
-  
-  // Handle adding product to cart
-  const handleAddToCart = (product: any) => {
-    setCart((prevCart) => {
-      // Check if product is already in cart
-      const existingItem = prevCart.find(item => item.id === product.id);
-      
-      if (existingItem) {
-        // Increase quantity if product already exists
-        return prevCart.map(item => 
-          item.id === product.id 
-            ? { ...item, quantity: (item.quantity || 1) + 1 }
-            : item
-        );
-      } else {
-        // Add new item with quantity 1
-        return [...prevCart, { ...product, quantity: 1 }];
-      }
-    });
-    
-    // Show feedback
-    alert(`Added ${product.name} to cart!`);
-  };
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        WebAssembly-Powered eCommerce Demo
-      </h1>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">
-          Products (WebAssembly Component)
-        </h2>
-        <div id="rust-product-grid-container" className="wasm-product-grid">
-          {/* Content will be populated by Rust/WebAssembly */}
-          <RustProductGrid
-            products={mockProducts}
-            currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            onPageChange={setCurrentPage}
-            onAddToCart={handleAddToCart}
-          />
+    <main className="container mx-auto px-4 py-8">
+      <Navigation />
+      
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          WebAssembly vs React.js Performance Comparison
+        </h1>
+        
+        <div className="bg-white border rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-4">About This Comparison</h2>
+          <p className="mb-4">
+            This application demonstrates a performance comparison between two implementations of the same UI:
+            one built with WebAssembly (Rust) and one built with pure React.js.
+          </p>
+          <p className="mb-4">
+            Both implementations share the same visual design and functionality but differ in their underlying technology.
+            The purpose is to compare performance characteristics like rendering time, memory usage, and interaction responsiveness.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div className="border rounded-lg p-6 bg-blue-50">
+              <h3 className="text-lg font-semibold mb-2 text-blue-800">WebAssembly Implementation</h3>
+              <p className="mb-4">
+                The WebAssembly version uses Rust compiled to WASM. The product grid component is 
+                rendered using Rust code that's loaded asynchronously and interacts with the React application.
+              </p>
+              <div className="mt-4">
+                <a 
+                  href="/wasm" 
+                  className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  View WASM Implementation
+                </a>
+              </div>
+            </div>
+            
+            <div className="border rounded-lg p-6 bg-green-50">
+              <h3 className="text-lg font-semibold mb-2 text-green-800">React.js Implementation</h3>
+              <p className="mb-4">
+                The React.js version uses pure React components without WebAssembly. The product grid is 
+                implemented using standard React components, hooks, and rendering.
+              </p>
+              <div className="mt-4">
+                <a 
+                  href="/react" 
+                  className="inline-block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  View React Implementation
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-gray-100 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Performance Metrics Measured</h2>
+          <ul className="list-disc pl-6 space-y-2">
+            <li><strong>Rendering Time:</strong> How long it takes to render the initial UI</li>
+            <li><strong>Memory Usage:</strong> How much memory is consumed by each implementation</li>
+            <li><strong>Interaction Performance:</strong> How quickly the UI responds to user actions like pagination and adding items to cart</li>
+          </ul>
         </div>
       </div>
-
-      {/* Cart Information (React Component) */}
-      <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-        <h2 className="text-xl font-semibold mb-2">
-          Cart ({cart.reduce((sum, item) => sum + (item.quantity || 0), 0)}{" "}
-          items)
-        </h2>
-        {cart.length === 0 ? (
-          <p className="text-gray-500 py-4 text-center">Your cart is empty</p>
-        ) : (
-          <>
-            <ul className="divide-y">
-              {cart.map((item) => (
-                <li
-                  key={item.id}
-                  className="flex justify-between items-center py-3"
-                >
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 mr-4">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.name}
-                        className="object-cover w-full h-full rounded"
-                      />
-                    </div>
-                    <span className="font-medium">{item.name}</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm text-gray-600">
-                      ${item.price.toFixed(2)} × {item.quantity}
-                    </div>
-                    <div className="font-bold">
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-4 text-right font-bold text-lg border-t pt-4">
-              Total: $
-              {cart
-                .reduce(
-                  (sum, item) => sum + item.price * (item.quantity || 0),
-                  0
-                )
-                .toFixed(2)}
-            </div>
-          </>
-        )}
-      </div>
-
-      <div className="mt-8 text-center text-sm text-gray-500">
-        <p>
-          This demo uses a Rust-based WebAssembly component for the product
-          grid, while the cart is a standard React component.
-        </p>
-        <p className="mt-2">
-          WebAssembly provides performant rendering for the product display,
-          while React handles the application state and cart UI.
-        </p>
-      </div>
-    </div>
+    </main>
   );
 }
