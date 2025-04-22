@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignore build artifacts in the public folder
+/public/*.wasm
+/public/*.js
+/public/*.d.ts
+/public/snippets
+/public/package.json

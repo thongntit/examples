@@ -2,9 +2,10 @@
   "name": "hybrid-example",
   "version": "1.0.0",
   "scripts": {
-    "build:wasm": "cd rust && wasm-pack build --target web",
+    "build:wasm": "cd rust && wasm-pack build --target web && cp -r pkg/* ../public/",
     "dev": "npm run build:wasm && next dev",
-    "build": "npm run build:wasm && next build"
+    "build": "npm run build:wasm && next build",
+    "start": "next start"
   },
   "dependencies": {
     "next": "13.4.5",
