@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masonry via Masonry.js</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Masonry.js</h1>
+    <p>JavaScript library for robust masonry layout with dynamic content.</p>
+  </header>
+
+  <div class="grid">
+    <div class="grid-sizer"></div>
+    <div class="gutter-sizer"></div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="360"></div>
+      <h3>Item 1</h3>
+      <p>This is a mock item with a description that provides context about the content.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="280"></div>
+      <h3>Item 2</h3>
+      <p>Another mock item with descriptive text to show how content flows in the layout.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="440"></div>
+      <h3>Item 3</h3>
+      <p>A longer description for this item to demonstrate text wrapping and varying content heights.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="320"></div>
+      <h3>Item 4</h3>
+      <p>Short description for this grid item to show minimal content.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="520"></div>
+      <h3>Item 5</h3>
+      <p>Medium length description that provides enough content to make this item interesting.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="400"></div>
+      <h3>Item 6</h3>
+      <p>Another item with descriptive text to fill out the masonry grid layout.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="300"></div>
+      <h3>Item 7</h3>
+      <p>Brief description for this grid item in the masonry layout.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="480"></div>
+      <h3>Item 8</h3>
+      <p>Detailed description that shows how longer text content affects the overall layout.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="380"></div>
+      <h3>Item 9</h3>
+      <p>Additional item to better demonstrate the 4-column layout on wide screens.</p>
+    </div>
+    
+    <div class="grid-item">
+      <div class="media" data-h="340"></div>
+      <h3>Item 10</h3>
+      <p>More content to fill out the masonry grid and show proper column distribution.</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script>
+    // Set random heights for media elements
+    function setMediaHeights() {
+      var medias = document.querySelectorAll('.media');
+      medias.forEach(function(media) {
+        var height = media.dataset.h ? parseInt(media.dataset.h) : 300;
+        media.style.height = height + 'px';
+        media.style.background = 'linear-gradient(135deg, #eef1f5, #dfe6ef)';
+        media.style.borderBottom = '1px solid #f0f0f0';
+      });
+    }
+
+    // Initialize Masonry
+    function initMasonry() {
+      setMediaHeights();
+      
+      var grid = document.querySelector('.grid');
+      var masonry = new Masonry(grid, {
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        gutter: '.gutter-sizer',
+        percentPosition: true
+      });
+
+      // Handle window resize
+      var resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          masonry.layout();
+        }, 300);
+      });
+    }
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', initMasonry);
+  </script>
+</body>
+</html>

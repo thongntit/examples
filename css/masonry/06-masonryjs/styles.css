@@ -1,0 +1,87 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #222;
+  background: #fafafa;
+}
+.site-header {
+  padding: 24px 16px;
+  text-align: center;
+}
+.site-header h1 {
+  margin: 0 0 8px;
+}
+.site-header p {
+  margin: 0;
+  color: #555;
+}
+
+.grid {
+  margin: 0 auto;
+  padding: 0 16px 24px;
+}
+
+/* Grid sizers for Masonry.js */
+.grid-sizer,
+.grid-item {
+  width: 23%;
+}
+
+.gutter-sizer {
+  width: 2.6667%;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 767px) {
+  .grid-sizer,
+  .grid-item {
+    width: 48%;
+  }
+  .gutter-sizer {
+    width: 4%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-sizer,
+  .grid-item {
+    width: 31.333%;
+  }
+  .gutter-sizer {
+    width: 3%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-sizer,
+  .grid-item {
+    width: 23%;
+  }
+  .gutter-sizer {
+    width: 2.6667%;
+  }
+}
+
+.grid-item {
+  margin-bottom: 16px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.grid-item .media {
+  width: 100%;
+  display: block;
+}
+
+.grid-item h3 {
+  font-size: 16px;
+  margin: 12px 12px 4px;
+}
+
+.grid-item p {
+  margin: 0 12px 16px;
+  color: #444;
+}

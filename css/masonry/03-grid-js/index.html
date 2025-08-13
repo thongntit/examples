@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masonry via CSS Grid + tiny JS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>CSS Grid Masonry (JS-assisted)</h1>
+    <p>CSS Grid with fixed row height; JS calculates each card's row span.</p>
+  </header>
+
+  <main class="grid" id="grid">
+    <article class="card">
+      <div class="media" data-h="360"></div>
+      <h2>Card 1</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="300"></div>
+      <h2>Card 2</h2>
+      <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="500"></div>
+      <h2>Card 3</h2>
+      <p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="420"></div>
+      <h2>Card 4</h2>
+      <p>Nulla fringilla, orci ac euismod semper, magna diam.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="280"></div>
+      <h2>Card 5</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="460"></div>
+      <h2>Card 6</h2>
+      <p>Etiam porta sem malesuada magna mollis euismod.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="340"></div>
+      <h2>Card 7</h2>
+      <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="520"></div>
+      <h2>Card 8</h2>
+      <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="320"></div>
+      <h2>Card 9</h2>
+      <p>Aenean lacinia bibendum nulla sed consectetur.</p>
+    </article>
+    <article class="card">
+      <div class="media" data-h="400"></div>
+      <h2>Card 10</h2>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    </article>
+  </main>
+
+  <script>
+    // Set random heights before grid JS measures
+    const container = document.getElementById('grid');
+    const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    Array.from(container.querySelectorAll('.media')).forEach(el => {
+      const h = el.dataset.h ? parseInt(el.dataset.h, 10) : rand(220, 560);
+      el.style.height = h + 'px';
+      el.style.background = 'linear-gradient(135deg, #eef1f5, #dfe6ef)';
+      el.style.display = 'block';
+      el.style.width = '100%';
+      el.style.borderBottom = '1px solid #f0f0f0';
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
+
