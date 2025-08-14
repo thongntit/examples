@@ -6,8 +6,9 @@ This folder contains demos of popular masonry techniques, ordered by implementat
 - 02-multicolumn/: Pure CSS Multi-column
 - 03-grid-js/: CSS Grid + tiny JS to compute row spans
 - 04-pure-js/: Pure JS shortest-column algorithm
-- 05-colcade/: Lightweight column-based library
-- 06-masonryjs/: Masonry.js library (with ImagesLoaded)
+- 05-pinterest/: Pinterest-style absolute positioning (production approach)
+- 06-colcade/: Lightweight column-based library
+- 07-masonryjs/: Masonry.js library (with ImagesLoaded)
 
 ## 1) Round-robin Columns (01-round-robin-columns/)
 
@@ -69,9 +70,40 @@ card.style.gridRowEnd = `span ${rowSpan}`;
 
 **Great for**: Learning or fully custom behavior without dependencies.
 
-## 5) Colcade lightweight library (05-colcade/)
+## 5) Pinterest-style Absolute Positioning (05-pinterest/)
+
+**Claude Rating: 5⭐** - The production approach used by Pinterest and other major platforms.
+
+**How it works**: Each item is positioned absolutely with calculated `top` and `left` values. Tracks column heights and always places the next item in the shortest column.
+
+**Pros**: Pixel-perfect control; no card stretching; excellent performance; natural item heights; true masonry packing.
+
+**Cons**: More complex algorithm; requires careful position calculations; DOM order doesn't match visual order.
+
+**Great for**: Production applications requiring Pinterest-level quality and performance.
+
+Key algorithm:
+```js
+// Find shortest column
+const columnIndex = getShortestColumnIndex();
+
+// Calculate exact position
+const left = columnIndex * (columnWidth + gutter);
+const top = columnHeights[columnIndex];
+
+// Apply absolute positioning
+item.style.left = left + 'px';
+item.style.top = top + 'px';
+
+// Update column height
+columnHeights[columnIndex] += itemHeight + gutter;
+```
+
+## 6) Colcade lightweight library (06-colcade/)
 
 **Claude Rating: 4⭐** - Lightweight and effective; good middle-ground between simplicity and features.
+
+**Note**: Similar approach to Pure JS (04-pure-js) but packaged as a library with better CSS integration.
 
 **How it works**: Lightweight column-based layout helper by Desandro.
 
@@ -90,9 +122,11 @@ Initialize:
 </script>
 ```
 
-## 6) Masonry.js library (06-masonryjs/)
+## 7) Masonry.js library (07-masonryjs/)
 
 **Claude Rating: 5⭐** - The gold standard; feature-rich, battle-tested, and handles complex scenarios.
+
+**Note**: Similar approach to Pinterest (05-pinterest) but with advanced features, optimizations, and cross-browser support.
 
 **How it works**: A mature JS layout engine repositions items. Use `imagesloaded` to wait for images before layout.
 

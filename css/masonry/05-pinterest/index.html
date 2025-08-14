@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pinterest-Style Absolute Positioning Masonry</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Pinterest-Style Masonry</h1>
+    <p>Absolute positioning with calculated top/left values - exactly how Pinterest does it.</p>
+  </header>
+
+  <div class="masonry-container" id="masonry-container">
+    <div class="masonry-item">
+      <div class="media" data-h="360"></div>
+      <h3>Pin 1</h3>
+      <p>This is how Pinterest actually implements their masonry layout using absolute positioning.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="280"></div>
+      <h3>Pin 2</h3>
+      <p>Each pin is positioned with exact top and left coordinates.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="500"></div>
+      <h3>Pin 3</h3>
+      <p>The algorithm finds the shortest column and places the next item there with precise positioning.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="420"></div>
+      <h3>Pin 4</h3>
+      <p>No card stretching, no flexbox containers - just pure absolute positioning magic.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="320"></div>
+      <h3>Pin 5</h3>
+      <p>This approach gives Pinterest complete control over item placement and performance.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="460"></div>
+      <h3>Pin 6</h3>
+      <p>Each pin maintains its natural height while achieving perfect masonry packing.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="340"></div>
+      <h3>Pin 7</h3>
+      <p>The container height is dynamically calculated based on the tallest column.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="520"></div>
+      <h3>Pin 8</h3>
+      <p>This method is highly performant and works perfectly with infinite scroll implementations.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="380"></div>
+      <h3>Pin 9</h3>
+      <p>Responsive breakpoints are handled by recalculating all positions when the viewport changes.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="440"></div>
+      <h3>Pin 10</h3>
+      <p>This is the gold standard for masonry layouts used by Pinterest and other major platforms.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="300"></div>
+      <h3>Pin 11</h3>
+      <p>Clean, efficient, and provides pixel-perfect control over the layout.</p>
+    </div>
+    
+    <div class="masonry-item">
+      <div class="media" data-h="480"></div>
+      <h3>Pin 12</h3>
+      <p>Each pin is placed using the shortest-column algorithm for optimal space utilization.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
