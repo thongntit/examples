@@ -30,12 +30,13 @@
             font-size: 18px;
         }
         .examples-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
+            position: relative;
             margin-bottom: 40px;
+            min-height: 400px;
         }
         .example-card {
+            position: absolute;
+            width: 350px;
             background: white;
             border-radius: 12px;
             padding: 24px;
@@ -112,6 +113,27 @@
         }
         .readme-link a:hover {
             text-decoration: underline;
+        }
+        
+        /* Responsive masonry adjustments */
+        @media (max-width: 768px) {
+            .example-card {
+                width: calc(100vw - 40px) !important;
+                max-width: 350px;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .example-card {
+                width: calc(100vw - 20px) !important;
+                padding: 16px;
+            }
+            .container {
+                padding: 5px;
+            }
         }
     </style>
 </head>
@@ -220,5 +242,91 @@
             <a href="README.md">📖 Read Detailed Implementation Guide & Algorithm Explanations</a>
         </div>
     </div>
+
+    <script>
+        function initMasonry() {
+            const container = document.querySelector('.examples-grid');
+            const items = document.querySelectorAll('.example-card');
+            
+            if (!container || items.length === 0) return;
+            
+            // Configuration
+            const containerPadding = 0;
+            const gutter = 20;
+            
+            // Get responsive item width
+            function getItemWidth() {
+                const viewportWidth = window.innerWidth;
+                if (viewportWidth <= 480) {
+                    return Math.min(350, viewportWidth - 20);
+                } else if (viewportWidth <= 768) {
+                    return Math.min(350, viewportWidth - 40);
+                } else {
+                    return 350;
+                }
+            }
+            
+            // Calculate number of columns based on container width
+            function calculateColumns() {
+                const itemWidth = getItemWidth();
+                const containerWidth = container.offsetWidth;
+                const availableWidth = containerWidth - (containerPadding * 2);
+                const columns = Math.floor((availableWidth + gutter) / (itemWidth + gutter));
+                return Math.max(1, columns); // At least 1 column
+            }
+            
+            // Layout items using shortest column algorithm
+            function layoutItems() {
+                const numColumns = calculateColumns();
+                const itemWidth = getItemWidth();
+                const columnHeights = new Array(numColumns).fill(0);
+                
+                // Reset container height
+                container.style.height = 'auto';
+                
+                items.forEach((item, index) => {
+                    // Find shortest column
+                    const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+                    
+                    // Calculate position
+                    const left = shortestColumnIndex * (itemWidth + gutter) + containerPadding;
+                    const top = columnHeights[shortestColumnIndex];
+                    
+                    // Apply position
+                    item.style.left = left + 'px';
+                    item.style.top = top + 'px';
+                    item.style.width = itemWidth + 'px';
+                    
+                    // Update column height
+                    const itemHeight = item.offsetHeight;
+                    columnHeights[shortestColumnIndex] += itemHeight + gutter;
+                });
+                
+                // Set container height to tallest column
+                const tallestColumn = Math.max(...columnHeights);
+                container.style.height = (tallestColumn - gutter) + 'px';
+            }
+            
+            // Initialize layout
+            layoutItems();
+            
+            // Handle window resize with debouncing
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(layoutItems, 300);
+            });
+            
+            // Also handle load event for any images that might affect heights
+            window.addEventListener('load', layoutItems);
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMasonry);
+        } else {
+            initMasonry();
+        }
+    </script>
 </body>
 </html>
