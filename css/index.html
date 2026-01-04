@@ -4,35 +4,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CSS Examples</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #f472b6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(99, 102, 241, 0.3);
+            animation: float 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+
+        .bg-animation span:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; animation-duration: 20s; }
+        .bg-animation span:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 25s; background: rgba(139, 92, 246, 0.3); }
+        .bg-animation span:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; background: rgba(244, 114, 182, 0.3); }
+        .bg-animation span:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; background: rgba(99, 102, 241, 0.2); }
+        .bg-animation span:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; background: rgba(139, 92, 246, 0.3); }
+        .bg-animation span:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(244, 114, 182, 0.2); }
+        .bg-animation span:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; background: rgba(99, 102, 241, 0.15); }
+        .bg-animation span:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; background: rgba(139, 92, 246, 0.3); }
+        .bg-animation span:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; background: rgba(244, 114, 182, 0.3); }
+        .bg-animation span:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; background: rgba(99, 102, 241, 0.2); }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.5;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -4s;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+        }
+
+        /* Grid */
+        ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        li {
+            perspective: 1000px;
+        }
+
+        /* Card */
+        a {
+            display: block;
+            position: relative;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.03),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        a:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(99, 102, 241, 0.2);
+        }
+
+        a:hover::before {
+            opacity: 1;
+        }
+
+        a:hover::after {
+            left: 100%;
+        }
+
+        a span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        a span::before {
+            content: '→';
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            color: var(--accent);
+        }
+
+        a:hover span::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Stagger animation */
+        li {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        li:nth-child(1) { animation-delay: 0.05s; }
+        li:nth-child(2) { animation-delay: 0.1s; }
+        li:nth-child(3) { animation-delay: 0.15s; }
+        li:nth-child(4) { animation-delay: 0.2s; }
+        li:nth-child(5) { animation-delay: 0.25s; }
+        li:nth-child(6) { animation-delay: 0.3s; }
+        li:nth-child(7) { animation-delay: 0.35s; }
+        li:nth-child(8) { animation-delay: 0.4s; }
+        li:nth-child(9) { animation-delay: 0.45s; }
+        li:nth-child(10) { animation-delay: 0.5s; }
+        li:nth-child(11) { animation-delay: 0.55s; }
+        li:nth-child(12) { animation-delay: 0.6s; }
+        li:nth-child(13) { animation-delay: 0.65s; }
+        li:nth-child(14) { animation-delay: 0.7s; }
+        li:nth-child(15) { animation-delay: 0.75s; }
+        li:nth-child(16) { animation-delay: 0.8s; }
+        li:nth-child(17) { animation-delay: 0.85s; }
+        li:nth-child(18) { animation-delay: 0.9s; }
+        li:nth-child(19) { animation-delay: 0.95s; }
+        li:nth-child(20) { animation-delay: 1s; }
+        li:nth-child(21) { animation-delay: 1.05s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            ul {
+                grid-template-columns: 1fr;
+            }
+
+            .orb {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <ul>
-        <li><a href="flex-child-pattern/">flex-child-pattern</a></li>
-        <li><a href="animation/">animation</a></li>
-        <li><a href="center-sidebar/">center-sidebar</a></li>
-        <li><a href="custom-checkbox/">custom-checkbox</a></li>
-        <li><a href="custom-input-file/">custom-input-file</a></li>
-        <li><a href="custom-radio/">custom-radio</a></li>
-        <li><a href="dropdown/">dropdown</a></li>
-        <li><a href="flexbox-layout/">flexbox-layout</a></li>
-        <li><a href="form-practice/">form-practice</a></li>
-        <li><a href="layout/">layout</a></li>
-        <li><a href="margin-collapse/">margin-collapse</a></li>
-        <li><a href="mixins/">mixins</a></li>
-        <li><a href="nth-child/">nth-child</a></li>
-        <li><a href="position/">position</a></li>
-        <li><a href="practice1/">pratice1</a></li>
-        <li><a href="progress-bar/">progress-bar</a></li>
-        <li><a href="raf-heavy-load/">ref-heavy-load</a></li>
-        <li><a href="sass/">sass</a></li>
-        <li><a href="table/">table</a></li>
-        <li><a href="tag/">tag</a></li>
-        <li><a href="text-with-divider/">text-with-divider</a></li>
-        <li><a href="uncharted-card/">uncharted-card</a></li>
-      <li><a href="masonry/">masonry</a></li>
-    </ul>
+    <div class="bg-animation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container">
+        <header class="header">
+            <span class="header-badge">✨ Explore CSS Magic</span>
+            <h1>CSS Examples</h1>
+            <p class="subtitle">A collection of creative CSS techniques and patterns</p>
+        </header>
+
+        <ul>
+            <li><a href="flex-child-pattern/"><span>flex-child-pattern</span></a></li>
+            <li><a href="animation/"><span>animation</span></a></li>
+            <li><a href="center-sidebar/"><span>center-sidebar</span></a></li>
+            <li><a href="custom-checkbox/"><span>custom-checkbox</span></a></li>
+            <li><a href="custom-input-file/"><span>custom-input-file</span></a></li>
+            <li><a href="custom-radio/"><span>custom-radio</span></a></li>
+            <li><a href="dropdown/"><span>dropdown</span></a></li>
+            <li><a href="form-practice/"><span>form-practice</span></a></li>
+            <li><a href="layout/"><span>layout</span></a></li>
+            <li><a href="margin-collapse/"><span>margin-collapse</span></a></li>
+            <li><a href="masonry/"><span>masonry</span></a></li>
+            <li><a href="mixins/"><span>mixins</span></a></li>
+            <li><a href="nth-child/"><span>nth-child</span></a></li>
+            <li><a href="position/"><span>position</span></a></li>
+            <li><a href="progress-bar/"><span>progress-bar</span></a></li>
+            <li><a href="raf-heavy-load/"><span>ref-heavy-load</span></a></li>
+            <li><a href="sass/"><span>sass</span></a></li>
+            <li><a href="table/"><span>table</span></a></li>
+            <li><a href="tag/"><span>tag</span></a></li>
+            <li><a href="text-with-divider/"><span>text-with-divider</span></a></li>
+            <li><a href="uncharted-card/"><span>uncharted-card</span></a></li>
+        </ul>
+
+        <footer class="footer">
+            Built with passion for CSS
+        </footer>
+    </div>
 </body>
 
 </html>

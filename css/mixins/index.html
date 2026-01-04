@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASS/SCSS Mixins Example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fc556f, #fd9c84);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #a6adc8;
+            margin-bottom: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #fc556f;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(to bottom, #fc556f, #fd9c84);
+            border-radius: 2px;
+        }
+
+        /* Code block styling */
+        .code-block {
+            background: #313244;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border: 1px solid #45475a;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .code-block .comment { color: #6c7086; }
+        .code-block .variable { color: #fab387; }
+        .code-block .mixin { color: #89b4fa; }
+        .code-block .param { color: #f9e2af; }
+        .code-block .property { color: #94e2d5; }
+        .code-block .string { color: #a6e3a1; }
+        .code-block .punctuation { color: #9399b2; }
+
+        /* Demo boxes */
+        .demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .demo-box {
+            background: #45475a;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .demo-label {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #a6adc8;
+        }
+
+        /* Demo: size mixin */
+        .size-demo-1 {
+            @include size(100px);
+            background: linear-gradient(135deg, #fc556f, #fd9c84);
+        }
+
+        .size-demo-2 {
+            @include size(150px, 80px);
+            background: linear-gradient(135deg, #fc556f, #fd9c84);
+        }
+
+        /* Demo: flexbox mixin */
+        .flex-demo-1 {
+            @include size(200px, 100px);
+            @include flexbox(center, center);
+            gap: 10px;
+        }
+
+        .flex-demo-1 .dot {
+            width: 20px;
+            height: 20px;
+            background: #fc556f;
+            border-radius: 50%;
+        }
+
+        .flex-demo-2 {
+            @include size(250px, 80px);
+            @include flexbox(center, space-between);
+            gap: 10px;
+        }
+
+        .flex-demo-2 .bar {
+            height: 8px;
+            background: #fd9c84;
+            border-radius: 4px;
+        }
+
+        .flex-demo-2 .bar:nth-child(1) { width: 40px; }
+        .flex-demo-2 .bar:nth-child(2) { width: 80px; }
+        .flex-demo-2 .bar:nth-child(3) { width: 40px; }
+
+        .info {
+            background: rgba(252, 85, 111, 0.1);
+            border-left: 4px solid #fc556f;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 20px;
+        }
+
+        .info strong { color: #fc556f; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SASS/SCSS Mixins</h1>
+        <p class="subtitle">Reusable code snippets that make CSS more maintainable</p>
+
+        <!-- Variables Section -->
+        <div class="section">
+            <h2 class="section-title">Variables</h2>
+            <div class="code-block">
+                <pre><span class="variable">$primary-color</span>: <span class="string">#fc556f</span>;
+<span class="variable">$secondary-color</span>: <span class="string">#fd9c84</span>;
+<span class="variable">$gradient</span>: <span class="string">linear-gradient(to right, $primary-color, $secondary-color)</span>;</pre>
+            </div>
+        </div>
+
+        <!-- Size Mixin Section -->
+        <div class="section">
+            <h2 class="section-title">@mixin size()</h2>
+            <div class="code-block">
+                <pre><span class="comment">// Sets width and height in one line</span>
+<span class="mixin">@mixin</span> <span class="param">size</span>(<span class="variable">$width</span>, <span class="variable">$height</span>: <span class="variable">$width</span>) {
+  <span class="property">width</span>: <span class="variable">$width</span>;
+  <span class="property">height</span>: <span class="variable">$height</span>;
+}
+
+<span class="comment">// Usage examples:</span>
+<span class="comment">.square { @include size(100px); }      </span><span class="comment">// 100px x 100px</span>
+<span class="comment">.rectangle { @include size(150px, 80px); }</span> <span class="comment">// 150px x 80px</span></pre>
+            </div>
+            <div class="demo">
+                <div>
+                    <div class="demo-label">@include size(100px)</div>
+                    <div class="demo-box size-demo-1"></div>
+                </div>
+                <div>
+                    <div class="demo-label">@include size(150px, 80px)</div>
+                    <div class="demo-box size-demo-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flexbox Mixin Section -->
+        <div class="section">
+            <h2 class="section-title">@mixin flexbox()</h2>
+            <div class="code-block">
+                <pre><span class="comment">// Shorthand for common flexbox properties</span>
+<span class="mixin">@mixin</span> <span class="param">flexbox</span>(
+  <span class="variable">$align</span>: flex-start,
+  <span class="variable">$justify</span>: flex-start,
+  <span class="variable">$flex-direction</span>: row,
+  <span class="variable">$wrap</span>: nowrap
+) {
+  <span class="property">display</span>: flex;
+  <span class="property">align-items</span>: <span class="variable">$align</span>;
+  <span class="property">justify-content</span>: <span class="variable">$justify</span>;
+  <span class="property">flex-direction</span>: <span class="variable">$flex-direction</span>;
+  <span class="property">flex-wrap</span>: nowrap;
+}
+
+<span class="comment">// Usage examples:</span>
+<span class="comment">.center { @include flexbox(center, center); }</span>
+<span class="comment">.space-between { @include flexbox(center, space-between); }</span></pre>
+            </div>
+            <div class="demo">
+                <div>
+                    <div class="demo-label">@include flexbox(center, center)</div>
+                    <div class="demo-box flex-demo-1">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="demo-label">@include flexbox(center, space-between)</div>
+                    <div class="demo-box flex-demo-2">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info">
+            <strong>Why use mixins?</strong> They let you define reusable CSS patterns and include them anywhere. Default parameters make them flexible and powerful.
+        </div>
+    </div>
+</body>
+</html>
